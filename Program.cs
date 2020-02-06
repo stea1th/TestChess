@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using TestChess.Figures;
+using TestChess.GameConfiguration;
 
 namespace TestChess
 {
@@ -12,8 +13,12 @@ namespace TestChess
     {
         static void Main(string[] args)
         {
-            var figureRegistry = new FigureRegistry();
-            figureRegistry.LoadFigures();
+            //var figureRegistry = new FigureRegistry();
+            //figureRegistry.LoadFigures();
+
+            var confReader = new ConfigurationReader();
+            var configuration = confReader.GetConfiguration();
+            configuration.Figures.ToList().ForEach(x => Console.WriteLine(x.type));
 
             //var baseAssembly = typeof(AbstractFigure)
 

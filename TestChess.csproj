@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -31,6 +32,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -45,10 +47,12 @@
   <ItemGroup>
     <Compile Include="ChessBoard.cs" />
     <Compile Include="Figures\AbstractFigure.cs" />
+    <Compile Include="GameConfiguration\Configuration.cs" />
     <Compile Include="Figures\FigureRegistry.cs" />
     <Compile Include="Figures\IFigure.cs" />
     <Compile Include="Figures\King.cs" />
     <Compile Include="Figures\Pawn.cs" />
+    <Compile Include="GameConfiguration\ConfigurationReader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -59,7 +63,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="GameConfiguration\Configuration.xml" />
+    <Content Include="GameConfiguration\Configuration.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

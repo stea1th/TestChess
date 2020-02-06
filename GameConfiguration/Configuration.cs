@@ -76,6 +76,7 @@ namespace TestChess.GameConfiguration
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
+
         public bool white
         {
             get

@@ -23,7 +23,10 @@ namespace TestChess
             var figureRegistry = new FigureRegistry(configuration);
             figureRegistry.LoadFigureTypes();
             figureRegistry.SetFiguresOnPosition();
-            figureRegistry.FiguresOnPosition.Values.ToList().ForEach(x => Console.WriteLine(x.View + " " + x.Position + " " + x.Name));
+            //figureRegistry.FiguresOnPosition.Values.ToList().ForEach(x => Console.WriteLine(x.View + " " + x.Position + " " + x.Name));
+            var figuresOnPosition = figureRegistry.FiguresOnPosition;
+            var chessBoard = new ChessBoard();
+            chessBoard.printForWhite(figuresOnPosition);
 
 
             //var baseAssembly = typeof(AbstractFigure)

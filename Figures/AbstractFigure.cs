@@ -29,6 +29,7 @@ namespace TestChess.Figures
             Name = name;
             Position = position;
             White = white;
+            Alive = true;
         }
     }
 }

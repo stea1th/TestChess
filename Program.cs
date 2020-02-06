@@ -18,6 +18,31 @@ namespace TestChess
 
         static void Main(string[] args)
         {
+            bool whiteMove = true;
+            var confReader = new ConfigurationReader();
+            var configuration = confReader.GetConfiguration();
+            var figureRegistry = new FigureRegistry(configuration);
+            figureRegistry.LoadFigureTypes();
+            figureRegistry.SetFiguresOnPosition();
+            var figuresOnPosition = figureRegistry.FiguresOnPosition;
+            var chessBoard = new ChessBoard(figuresOnPosition);
+            var turnConverter = new TurnConverter();
+            while (true)
+            {
+                if (whiteMove)
+                {
+                    chessBoard.PrintForWhite();
+                }
+                else 
+                {
+                    chessBoard.PrintForBlack(); 
+                }
+                var turn = chessBoard.ReadFromConsole();
+                var arr = turnConverter.Convert(turn);
+                chessBoard.MoveFigure(arr[0], arr[1]);
+                whiteMove = !whiteMove;
+            }
+
             //var turnConverter = new TurnConverter();
             //var list = turnConverter.Match("e2 H   A5");
             //list.ForEach(x => Console.WriteLine(x));

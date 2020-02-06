@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace TestChess.Figures
 {
-    class Pawn : AbstractFigure
+    class Queen : AbstractFigure
     {
-
-        public Pawn(int position, bool white) : base("p", "pawn", position, white)
+        public Queen(int position, bool white) : base("Q", "queen", position, white)
         {
         }
     }

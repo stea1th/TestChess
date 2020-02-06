@@ -46,7 +46,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChessBoard.cs" />
+    <Compile Include="ConsoleWrapper.cs" />
     <Compile Include="Figures\AbstractFigure.cs" />
+    <Compile Include="Figures\Bishop.cs" />
+    <Compile Include="Figures\Knight.cs" />
+    <Compile Include="Figures\Queen.cs" />
+    <Compile Include="Figures\Rook.cs" />
     <Compile Include="GameConfiguration\Configuration.cs" />
     <Compile Include="Figures\FigureRegistry.cs" />
     <Compile Include="Figures\IFigure.cs" />

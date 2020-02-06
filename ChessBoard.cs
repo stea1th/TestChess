@@ -14,9 +14,21 @@ namespace TestChess
         private readonly string _twoSpaces = "  ";
         private readonly string _oneSpace = " ";
 
-        public void printForWhiteNumbers()
+        public void PrintForWhiteNumbers()
         {
-
+            for (int row = 0; row < _boardSize; row++)
+            {
+                Console.WriteLine();
+                Console.WriteLine("---------------------------------");
+                for (int column = 1; column <= _boardSize; column++)
+                {
+                    string num = (column + _boardSize * row).ToString();
+                    Console.Write("| " + (num.Length == 1 ? num + _oneSpace : num));
+                }
+                Console.Write("|");
+            }
+            Console.WriteLine();
+            Console.WriteLine("---------------------------------");
         } 
 
     }

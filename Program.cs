@@ -10,6 +10,9 @@ namespace TestChess
     {
         static void Main(string[] args)
         {
+            var chessBoard = new ChessBoard();
+            chessBoard.PrintForWhiteNumbers();
+            Console.ReadKey();
         }
     }
 }

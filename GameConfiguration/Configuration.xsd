@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Configuration"
+    targetNamespace="http://infoteam.de"
+    attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    xmlns="http://infoteam.de"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:element name ="Configuration">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Figures">
+          <xs:complexType>
+            <xs:sequence minOccurs="1" maxOccurs="unbounded">
+              <xs:element ref="Figure"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name ="Figure">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:string" name="name" use="required"/>
+          <xs:attribute type="xs:integer" name="position" use="required"/>
+          <xs:attribute type="xs:boolean" name="white" use="required"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

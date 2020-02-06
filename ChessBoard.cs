@@ -14,6 +14,12 @@ namespace TestChess
         private readonly string _threeSpaces = "   ";
         private readonly string _twoSpaces = "  ";
         private readonly string _oneSpace = " ";
+        private readonly string _lettersCoordinates;
+
+        public ChessBoard()
+        {
+            _lettersCoordinates = CreateLettersCoordinates();
+        }
 
         public void PrintForWhiteNumbers()
         {
@@ -32,7 +38,7 @@ namespace TestChess
             Console.WriteLine("---------------------------------");
         } 
 
-        public void printForWhite(Dictionary<int, IFigure> figures)
+        public void PrintForWhite(Dictionary<int, IFigure> figures)
         {
             for (int row = 0; row < _boardSize; row++)
             {
@@ -56,19 +62,55 @@ namespace TestChess
             }
             Console.WriteLine();
             Console.WriteLine(_threeSpaces + "---------------------------------");
-            Console.WriteLine(_threeSpaces + CreateLettersChain());
+            Console.WriteLine(_threeSpaces + _lettersCoordinates);
             Console.WriteLine();
         } 
 
+        public void PrintForBlack(Dictionary<int, IFigure> figures)
+        {
+            for (int row = _boardSize; row > 0; row--)
+            {
+                Console.WriteLine();
+                Console.WriteLine(_threeSpaces + "---------------------------------");
+                for (int column = 0; column <= _boardSize; column++)
+                {
+                    if(column == 0)
+                    {
+                        Console.Write(_oneSpace + (_boardSize - row + 1) + _oneSpace);
+                    }
+                    else
+                    {
+                        int num = _boardSize * row - column + 1;
+                        figures.TryGetValue(num, out var figure);
+                        string cell = figure != null && figure.Alive ? _oneSpace + figure.View : GetEmptyCell(row, num, false);
+                        Console.Write("|" + cell);
+                    }
+                }
+                Console.Write("|");
+            }
+            Console.WriteLine();
+            Console.WriteLine(_threeSpaces + "---------------------------------");
+            Console.WriteLine(_threeSpaces + _twoSpaces + ReverseLettersCoordinates());
+            Console.WriteLine();
+        }
 
 
-        private string CreateLettersChain()
+
+        private string CreateLettersCoordinates()
         {
             var letters = Enumerable.Range(65, 72).Select(x => (char)x).ToList().GetRange(0, 8);
             var stringBuilder = new StringBuilder(_twoSpaces);
             letters.ForEach(x => stringBuilder.Append(x).Append(_threeSpaces));
             return stringBuilder.ToString();
         }
+
+        private string ReverseLettersCoordinates()
+        {
+            var arr = _lettersCoordinates.Trim().ToCharArray();
+            Array.Reverse(arr);
+            return new string(arr);
+        }
+
 
         private string GetEmptyCell(int row, int num, bool isWhite)
         {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using TestChess.Figures;
 using TestChess.GameConfiguration;
@@ -23,16 +24,15 @@ namespace TestChess
             var figureRegistry = new FigureRegistry(configuration);
             figureRegistry.LoadFigureTypes();
             figureRegistry.SetFiguresOnPosition();
-            //figureRegistry.FiguresOnPosition.Values.ToList().ForEach(x => Console.WriteLine(x.View + " " + x.Position + " " + x.Name));
             var figuresOnPosition = figureRegistry.FiguresOnPosition;
             var chessBoard = new ChessBoard();
-            chessBoard.printForWhite(figuresOnPosition);
+            chessBoard.PrintForWhite(figuresOnPosition);
+            Thread.Sleep(5000);
+            chessBoard.PrintForBlack(figuresOnPosition);
+            Thread.Sleep(5000);
+            chessBoard.PrintForWhite(figuresOnPosition);
 
 
-            //var baseAssembly = typeof(AbstractFigure)
-
-            //var chessBoard = new ChessBoard();
-            //chessBoard.PrintForWhiteNumbers();
             Console.ReadKey();
         }
     }

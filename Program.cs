@@ -11,14 +11,20 @@ namespace TestChess
 {
     class Program
     {
+        protected Program()
+        {
+        }
+
         static void Main(string[] args)
         {
-            //var figureRegistry = new FigureRegistry();
-            //figureRegistry.LoadFigures();
 
             var confReader = new ConfigurationReader();
             var configuration = confReader.GetConfiguration();
-            configuration.Figures.ToList().ForEach(x => Console.WriteLine(x.type));
+            var figureRegistry = new FigureRegistry(configuration);
+            figureRegistry.LoadFigureTypes();
+            figureRegistry.SetFiguresOnPosition();
+            figureRegistry.FiguresOnPosition.Values.ToList().ForEach(x => Console.WriteLine(x.View + " " + x.Position + " " + x.Name));
+
 
             //var baseAssembly = typeof(AbstractFigure)
 

@@ -5,6 +5,6 @@
     <Figure type="pawn" position="3" white="true"/>
     <Figure type="pawn" position="4" white="true"/>
     <Figure type="king" position="7" white="true"/>
-    <Figure type="queen" position="8" white="false"/>
+    <!--<Figure type="queen" position="8" white="false"/>-->
   </Figures>
 </Configuration>

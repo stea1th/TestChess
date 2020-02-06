@@ -4,34 +4,43 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using TestChess.GameConfiguration;
 
 namespace TestChess.Figures
 {
     class FigureRegistry
     {
+        public Dictionary<string, Type> FigureTypes { get; set; }
 
-        public Dictionary<string, IFigure> Figures { get; set; }
+        public Dictionary<int, IFigure> FiguresOnPosition { get; set; }
 
-        public void LoadFigures()
+        public Configuration GameConfiguration { get; }
+
+        public FigureRegistry(Configuration configuration)
         {
-            var asm = Assembly.Load("TestChess");
-            var types = asm.GetTypes();
-            var result = types.Where(x => x.GetInterface("IFigure") != null && !x.IsAbstract).ToList();
-            //result.ForEach(x => Figures.Add(x.Name.ToLower(), Create(x)));
-            result.ForEach(x =>
-            {
-                var fig = Create(x);
-                Console.WriteLine(fig.Name + " " + fig.Position+ " " + fig.White);
-            });
-            
-
-            //result.ForEach(x => Console.WriteLine(x.Name));
+            this.GameConfiguration = configuration;
         }
 
-        private IFigure Create(Type type) 
+
+        public void LoadFigureTypes()
         {
-            //return (IFigure)Activator.CreateInstance(type);
-            return (IFigure)type.GetConstructor(new Type[] { typeof(int), typeof(bool) }).Invoke(new object[] { 2, true });
+
+            var asm = Assembly.Load("TestChess");
+            var types = asm.GetTypes();
+            FigureTypes = types.Where(x => x.GetInterface("IFigure") != null && !x.IsAbstract).ToDictionary(x => x.Name.ToLower(), x => x);
+        }
+
+        public void SetFiguresOnPosition()
+        {
+            var configurationFigures = GameConfiguration.Figures.ToList();
+            FiguresOnPosition = configurationFigures.Select(x => CreateFigure(x)).ToDictionary(f => f.Position, f => f);
+        }
+
+        private IFigure CreateFigure(ConfigurationFigure configurationFigure) 
+        {
+            FigureTypes.TryGetValue(configurationFigure.type, out Type type);
+            return (IFigure)type.GetConstructor(new Type[] { typeof(int), typeof(bool) })
+                .Invoke(new object[] { int.Parse(configurationFigure.position), configurationFigure.white });
         }
     }
 }

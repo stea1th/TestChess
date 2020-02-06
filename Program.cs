@@ -18,19 +18,27 @@ namespace TestChess
 
         static void Main(string[] args)
         {
+            //var turnConverter = new TurnConverter();
+            //var list = turnConverter.Match("e2 H   A5");
+            //list.ForEach(x => Console.WriteLine(x));
+            //var x = turnConverter.TransformToIntArray(list);
+            //Console.WriteLine(x[0]);
+            //Console.WriteLine(x[1]);
 
-            var confReader = new ConfigurationReader();
-            var configuration = confReader.GetConfiguration();
-            var figureRegistry = new FigureRegistry(configuration);
-            figureRegistry.LoadFigureTypes();
-            figureRegistry.SetFiguresOnPosition();
-            var figuresOnPosition = figureRegistry.FiguresOnPosition;
-            var chessBoard = new ChessBoard();
-            chessBoard.PrintForWhite(figuresOnPosition);
-            Thread.Sleep(5000);
-            chessBoard.PrintForBlack(figuresOnPosition);
-            Thread.Sleep(5000);
-            chessBoard.PrintForWhite(figuresOnPosition);
+            //Console.WriteLine(list.Count);
+
+            //var confReader = new ConfigurationReader();
+            //var configuration = confReader.GetConfiguration();
+            //var figureRegistry = new FigureRegistry(configuration);
+            //figureRegistry.LoadFigureTypes();
+            //figureRegistry.SetFiguresOnPosition();
+            //var figuresOnPosition = figureRegistry.FiguresOnPosition;
+            //var chessBoard = new ChessBoard();
+            //chessBoard.PrintForWhite(figuresOnPosition);
+            //Thread.Sleep(5000);
+            //chessBoard.PrintForBlack(figuresOnPosition);
+            //Thread.Sleep(5000);
+            //chessBoard.PrintForWhite(figuresOnPosition);
 
 
             Console.ReadKey();

@@ -15,13 +15,9 @@ namespace TestChess
         private readonly string _twoSpaces = "  ";
         private readonly string _oneSpace = " ";
         private readonly string _lettersCoordinates;
-        private int _killed = 100;
 
-        public Dictionary<int, IFigure> Figures;
-
-        public ChessBoard(Dictionary<int, IFigure> figures)
+        public ChessBoard()
         {
-            Figures = figures;
             _lettersCoordinates = CreateLettersCoordinates();
         }
 
@@ -42,7 +38,7 @@ namespace TestChess
             Console.WriteLine("---------------------------------");
         } 
 
-        public void PrintForWhite()
+        public void PrintForWhite(Dictionary<int, IFigure> figures)
         {
             for (int row = 0; row < _boardSize; row++)
             {
@@ -57,7 +53,7 @@ namespace TestChess
                     else
                     {
                         int num = column + _boardSize * row;
-                        Figures.TryGetValue(num, out var figure);
+                        figures.TryGetValue(num, out var figure);
                         string cell = figure != null && figure.Alive ? _oneSpace + figure.View : GetEmptyCell(row, num, true);
                         Console.Write("|" + cell);
                     }
@@ -70,7 +66,7 @@ namespace TestChess
             Console.WriteLine();
         } 
 
-        public void PrintForBlack()
+        public void PrintForBlack(Dictionary<int, IFigure> figures)
         {
             for (int row = _boardSize; row > 0; row--)
             {
@@ -85,7 +81,7 @@ namespace TestChess
                     else
                     {
                         int num = _boardSize * row - column + 1;
-                        Figures.TryGetValue(num, out var figure);
+                        figures.TryGetValue(num, out var figure);
                         string cell = figure != null && figure.Alive ? _oneSpace + figure.View : GetEmptyCell(row, num, false);
                         Console.Write("|" + cell);
                     }
@@ -97,8 +93,6 @@ namespace TestChess
             Console.WriteLine(_threeSpaces + _twoSpaces + ReverseLettersCoordinates());
             Console.WriteLine();
         }
-
-
 
         private string CreateLettersCoordinates()
         {
@@ -137,31 +131,6 @@ namespace TestChess
             return Console.ReadLine();
         }
 
-        public bool MoveFigure(int from, int to)
-        {
-            Figures.TryGetValue(from, out var myFigure);
-            if (myFigure == null) return false;
-            Figures.TryGetValue(to, out var anotherFigure);
-            if (anotherFigure != null)
-            {
-                if (myFigure.White == anotherFigure.White) return false;
-                else
-                {
-                    anotherFigure.Alive = false;
-                    Figures.Add(_killed, anotherFigure);
-                    Figures.Remove(to);
-                    Figures.Add(to, myFigure);
-                    Figures.Remove(from);
-                    _killed++;
-                    return true;
-                }
-            }
-            else
-            {
-                Figures.Add(to, myFigure);
-                Figures.Remove(from);
-                return true;
-            }
-        }
+        
     }
 }

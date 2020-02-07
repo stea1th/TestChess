@@ -46,7 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChessBoard.cs" />
-    <Compile Include="ConsoleWrapper.cs" />
+    <Compile Include="Engine\ChessEngine.cs" />
     <Compile Include="Figures\AbstractFigure.cs" />
     <Compile Include="Figures\Bishop.cs" />
     <Compile Include="Figures\Knight.cs" />
@@ -58,9 +58,11 @@
     <Compile Include="Figures\King.cs" />
     <Compile Include="Figures\Pawn.cs" />
     <Compile Include="GameConfiguration\ConfigurationReader.cs" />
+    <Compile Include="Engine\IChessEngine.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TurnConverter.cs" />
+    <Compile Include="DTO\Turn.cs" />
+    <Compile Include="Util\TurnConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
